@@ -1,4 +1,4 @@
-float a = 0, xRad = 100, yRad = 100;
+float a = 0, xRad = 120, yRad = 120;
 float vel = 0, rotSpeed = 0.02, rot;
 boolean newCirc;
 float mX, mY;
@@ -68,7 +68,7 @@ public void startPage()
   strokeWeight(2);
   //newCircMotion(mouseX, mouseY, a, a);
   newCircMotion(width/2, height/2, a, a, xRad, yRad, 20);
-  newCircMotion(width/2, height/2 + 200, a, 1, xRad, yRad, 20);
+  newCircMotion(width/2, height/2 + 175, a, 1, xRad, yRad, 20);
   
   fill(255);
   textSize(30);
@@ -90,16 +90,16 @@ public void newCircMotion(float xC, float yC, float aC, float aS, float radX, fl
 
 public void circularMotion()
 {
-  background(255, 255, 160);
+  background(190);
   rot = (2/rotSpeed);
   
   noFill();
-  strokeWeight(10);
-  stroke(255, 0, 0);
+  strokeWeight(15);
+  stroke(0, 15, 150);
   ellipse(width / 2, height / 2, xRad*2, yRad*2);
  
   stroke(0, 255, 0);
   fill(0, 255, 0);
   strokeWeight(2);
-  newCircMotion(width/2, height/2, a, a, xRad, yRad, 10);
+  newCircMotion(width/2, height/2, a, a, xRad, yRad, 15);
 }
