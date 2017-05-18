@@ -1,5 +1,5 @@
 float a = 0, xRad = 100, yRad = 100;
-float vel = 0, rotSpeed = 0.03, rot;
+float vel = 0, rotSpeed = 0.02, rot;
 boolean newCirc;
 float mX, mY;
 int stage = 0;
@@ -8,7 +8,6 @@ public void setup()
 {
     background(0);
     size(700, 600);
-    //Click to add more circular motions centered at where it was clicked. Random color
 }
 
 public void draw()
@@ -18,9 +17,13 @@ public void draw()
     startPage();
     if (newCirc == true)
     {
-      newCircMotion(mX, mY, a, a, xRad, yRad);
+      //newCircMotion(mX, mY, a, a, xRad, yRad);
+      stroke(255, 250, 100);
+      fill(255, 250, 100);
+      newCircMotion(width/2, height/2, a, a, xRad*2, yRad*2, 20);
+      newCircMotion(width/2, height/2, a, a, xRad/2, yRad/2, 20);
     }
-    newCircMotion(mouseX, mouseY, a, a, 20, 20);
+    //newCircMotion(mouseX, mouseY, a, a, 20, 20);
   }
   else
     circularMotion();
@@ -40,7 +43,10 @@ public void keyPressed()
         yRad -= 0.5;
     }
     if (key == 'r')
+    {
       stage = 0;
+      yRad = 100;
+    }
   }
 }
 
@@ -61,27 +67,24 @@ public void startPage()
   fill(255, 180, 50);
   strokeWeight(2);
   //newCircMotion(mouseX, mouseY, a, a);
-  newCircMotion(width/2, height/2, a, a, xRad, yRad);
-  newCircMotion(width/2, height/2 + 200, a, 1, xRad, yRad);
-  fill(255, 255, 160);
-  newCircMotion(width/2, height/2, a, a, xRad*2, yRad*2);
-  newCircMotion(width/2, height/2, a, a, xRad/2, yRad/2);
+  newCircMotion(width/2, height/2, a, a, xRad, yRad, 20);
+  newCircMotion(width/2, height/2 + 200, a, 1, xRad, yRad, 20);
   
   fill(255);
   textSize(30);
-  text("Relationship between", 185, 100);
+  text("   Relationship between", 185, 100);
   textSize(50);
-  text("Uniform Circular Motion &\n  Simple Harmonic Motion", 15, 160);
+  text(" Uniform Circular Motion &\n   Simple Harmonic Motion", 15, 160);
   textSize(20);
   text("   Press any key to continue.", 205, height-50);
 }
 
-public void newCircMotion(float xC, float yC, float aC, float aS, float radX, float radY)
+public void newCircMotion(float xC, float yC, float aC, float aS, float radX, float radY, float r)
 {
   float x = xC + cos(aC) * radX;
   float y = yC + sin(aS) * radY;
 
-  ellipse(x, y, 10, 10);
+  ellipse(x, y, r, r);
   a = a + rotSpeed;
 }
 
@@ -98,10 +101,5 @@ public void circularMotion()
   stroke(0, 255, 0);
   fill(0, 255, 0);
   strokeWeight(2);
-  float x = width / 2 + cos(a) * xRad;
-  float y = height / 2 + sin(a) * yRad;
-
-  ellipse(x, y, 10, 10);
-      
-  a = a + rotSpeed;
+  newCircMotion(width/2, height/2, a, a, xRad, yRad, 10);
 }
