@@ -1,8 +1,10 @@
 float a = 0, xRad = 120, yRad = 120;
-float vel = 0, rotSpeed = 0.02, rot;
+float vel = 0, rotSpeed = 0.0166, rot;
 boolean newCirc;
 float mX, mY;
 int stage = 0;
+float omega;
+
 
 public void setup()
 {
@@ -12,6 +14,8 @@ public void setup()
 
 public void draw()
 {
+  //omega = 2*PI/a;
+  //System.out.println(omega);
   if (stage == 0)
   {
     startPage();
@@ -68,13 +72,13 @@ public void startPage()
   strokeWeight(2);
   //newCircMotion(mouseX, mouseY, a, a);
   newCircMotion(width/2, height/2, a, a, xRad, yRad, 20);
-  newCircMotion(width/2, height/2 + 175, a, 1, xRad, yRad, 20);
+  newCircMotion(width/2, height/2 + 180, a, 1, xRad, yRad, 20);
   
   fill(255);
   textSize(30);
   text("   Relationship between", 185, 100);
   textSize(50);
-  text(" Uniform Circular Motion &\n   Simple Harmonic Motion", 15, 160);
+  text("   Uniform Circular Motion &\n    Simple Harmonic Motion", 15, 160);
   textSize(20);
   text("   Press any key to continue.", 205, height-50);
 }
@@ -86,6 +90,8 @@ public void newCircMotion(float xC, float yC, float aC, float aS, float radX, fl
 
   ellipse(x, y, r, r);
   a = a + rotSpeed;
+  if (a >= 2*PI)
+    a = 0;
 }
 
 public void circularMotion()
