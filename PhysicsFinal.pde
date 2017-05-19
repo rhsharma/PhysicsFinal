@@ -5,8 +5,6 @@ float mX, mY;
 int stage = 0;
 float omega;
 
-//Omega = 2pi/a
-
 public void setup()
 {
     background(0);
@@ -34,32 +32,31 @@ public void draw()
   {
     circularMotion();
     fill(255);
-    textSize(30);
+    textSize(25);
     
-    text("The ball begins at constant speed in uniform\ncircular motion. Once the ellipse is "
-       + "completely\nhorizontal, we can see that it is moving in\nsimple harmonic motion.", 10, 35);
-       //Somthing about the same amplitudes and radius. And angular velocity.
-    text("Angular Velocity: 10", 20, height-100);
-    float rate = 0.1;
+    text("The ball begins at constant speed in uniform circular\nmotion. Once the ellipse is "
+       + "completely horizontal, it is\nmoving in simple harmonic "
+       + "motion, fastest in the\nmiddle and slowing until coming to a stop and turning\nat the ends.", 10, 35);
+    text("Angular Velocity: 10", 20, height-125);
+    float rate = 0.1, diff;
     float xCo = width/2 + cos(a) * xRad;
+    if (xCo < 350)
+      diff = 350 - xCo + 0.5;
+    else
+      diff = xCo - 350 + 0.5;
+      
+    
     if (yRad <= 0)
     {
-      text("Linear Speed: " + (int)vel, 20, height-70);
-      if(xCo < width/2 && goLeft == false)
+      for (int i = 0; i < 120; i++)
       {
-        vel += rate;
+        vel = 12 - diff/12 - 1;
       }
-      else if(xCo < width/2 && goLeft == true)
-      {
-        vel -= rate;
-      }
-      else if (xCo > width/2 && goLeft)
-        vel += rate;
-      else if (xCo > width/2 && goLeft == false)
-        vel -= rate;
-      else
-        vel = 10;
-      text(xCo, 500, height-100);
+      text("Linear Speed: " + (int)vel, width/2 + 50, height-125);
+      textSize(18);
+      text("Note: The amplitude of the SHM is the same as the radius\n"
+         + "of the uniform circular motion. Similarly, the angular\n"
+         + "velocity and angular frequency are also the same.", 20, height - 75);
     }
   }
 }
