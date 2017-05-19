@@ -1,10 +1,11 @@
 float a = 0, xRad = 120, yRad = 120;
-float vel = 0, rotSpeed = 0.0166, rot;
-boolean newCirc;
+float vel = 0, rotSpeed = 0.0166, rev;
+boolean newCirc, goLeft = true;
 float mX, mY;
 int stage = 0;
 float omega;
 
+//Omega = 2pi/a
 
 public void setup()
 {
@@ -14,8 +15,8 @@ public void setup()
 
 public void draw()
 {
-  //omega = 2*PI/a;
-  //System.out.println(omega);
+  omega = (60*rotSpeed*yRad)/(yRad);  //Radians per second
+  rev = omega/(2);                    //Rev per second
   if (stage == 0)
   {
     startPage();
@@ -30,7 +31,37 @@ public void draw()
     //newCircMotion(mouseX, mouseY, a, a, 20, 20);
   }
   else
+  {
     circularMotion();
+    fill(255);
+    textSize(30);
+    
+    text("The ball begins at constant speed in uniform\ncircular motion. Once the ellipse is "
+       + "completely\nhorizontal, we can see that it is moving in\nsimple harmonic motion.", 10, 35);
+       //Somthing about the same amplitudes and radius. And angular velocity.
+    text("Angular Velocity: 10", 20, height-100);
+    float rate = 0.1;
+    float xCo = width/2 + cos(a) * xRad;
+    if (yRad <= 0)
+    {
+      text("Linear Speed: " + (int)vel, 20, height-70);
+      if(xCo < width/2 && goLeft == false)
+      {
+        vel += rate;
+      }
+      else if(xCo < width/2 && goLeft == true)
+      {
+        vel -= rate;
+      }
+      else if (xCo > width/2 && goLeft)
+        vel += rate;
+      else if (xCo > width/2 && goLeft == false)
+        vel -= rate;
+      else
+        vel = 10;
+      text(xCo, 500, height-100);
+    }
+  }
 }
 
 public void keyPressed()
@@ -49,8 +80,10 @@ public void keyPressed()
     if (key == 'r')
     {
       stage = 0;
-      yRad = 100;
+      yRad = 120;
     }
+    if (key == 'a')
+      yRad = 0;
   }
 }
 
@@ -97,7 +130,7 @@ public void newCircMotion(float xC, float yC, float aC, float aS, float radX, fl
 public void circularMotion()
 {
   background(190);
-  rot = (2/rotSpeed);
+  //rot = (2/rotSpeed);
   
   noFill();
   strokeWeight(15);
